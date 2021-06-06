@@ -1,17 +1,23 @@
 import { useState, useEffect } from 'react';
+import Spinner from '../Spinner/Spinner.component';
 import Gif from '../Gif/Gif.component';
 import getGifs from '../../services/getGifs';
 
-export default function GifList({ keyword }) {
+export default function GifList({ params: { keyword }}) {
   const [gifs, setGifs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true)
     async function getData() {
       const data = await getGifs({ keyword });
       setGifs(data);
+      setLoading(false)
     }
     getData();
   }, [keyword]);
+
+  if (loading) return <Spinner />;
 
   return (
     gifs.length ?

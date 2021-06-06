@@ -1,11 +1,15 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useLocation } from "wouter";
 
-export default function Search({setKeyword}) {
+export default function Search() {
   const [search, setSearch] = useState('');
+  const [, setLocation] = useLocation();
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    setKeyword(search);
+    if (search !== '') {
+      setLocation(`/gif/${search}`);
+    }
   }
 
   const handleChange = ev => {
@@ -22,7 +26,7 @@ export default function Search({setKeyword}) {
           type="text"
           name="search"
           id="search"
-          placeholder="Search gifs..."
+          placeholder="Search for gifs..."
         />
         <button
           type="submit"
