@@ -16,16 +16,18 @@ export default function GifList({ keyword }) {
   return (
     gifs.length ?
       (
-        gifs.map(({ id, title, image: { url, width, height } }) => (
-          <Gif
-            key={id}
-            id={id}
-            title={title}
-            url={url}
-            width={width}
-            height={height}
-          />
-        ))
+        <div className="grid grid-cols-4 gap-4">
+          {gifs.map(({ id, title, image: { url, width, height } }) => (
+            <Gif
+              key={id}
+              id={id}
+              title={title}
+              url={url}
+              width={width}
+              height={height}
+            />
+          ))}
+        </div>
       ) :
       (
         <h2>No se han encontrado gifs</h2>
