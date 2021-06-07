@@ -8,7 +8,7 @@ export default function Search() {
   const handleSubmit = ev => {
     ev.preventDefault();
     if (search !== '') {
-      setLocation(`/gif/${search}`);
+      setLocation(`/gifs/${search}`);
     }
   }
 
@@ -17,7 +17,8 @@ export default function Search() {
   }
 
   return (
-    <div className="form-wrapper py-20 flex justify-center">
+    <div className="form-wrapper flex justify-center flex-col items-center">
+      <h4 className="text-white text-opacity-50 mb-3">Start typing to search your preferred gifs</h4>
       <form action="" onSubmit={handleSubmit}>
         <input
           className="p-3 rounded border-2 border-purple-500 mr-4 shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300 focus:border-transparent transition-all"

@@ -1,6 +1,8 @@
-import Search from './components/Search/Search.component';
+import Search from './components/Search';
 import { Route, Link } from 'wouter';
-import GifList from './components/GifList/GifList.component';
+import Gifs from './pages/Gifs';
+import Detail from './pages/Detail/index';
+import Home from './pages/Home';
 
 function App() {
 
@@ -8,13 +10,17 @@ function App() {
     <main className="App py-10 bg-gray-800 min-h-screen">
       <div className="container mx-auto">
         <section className="App-content">
-          <div className="flex justify-center">
-            <Link to="/">
-              <h1 className="text-7xl text-center text-purple-300 font-bold cursor-pointer inline-block">Giffy App 👾</h1>
-            </Link>
+          <div className="App-header mb-5">
+            <div className="flex justify-between">
+              <Link to="/">
+                <h1 className="text-7xl text-center text-purple-300 font-bold cursor-pointer inline-block">Giffy App 👾</h1>
+              </Link>
+              <Search />
+            </div>
           </div>
-          <Search />
-          <Route path="/gif/:keyword" component={GifList} />
+          <Route path="/" component={Home} />
+          <Route path="/gifs/:keyword" component={Gifs} />
+          <Route path="/gif/:id" component={Detail} />
         </section>
       </div>
     </main>
