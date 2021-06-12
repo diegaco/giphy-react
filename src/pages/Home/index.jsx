@@ -1,21 +1,10 @@
-import {useState, useEffect} from 'react';
 import GifsList from '../../components/GifsList';
 import Spinner from '../../components/Spinner';
-import { getTrendingGifs } from '../../services/getGifs';
+import useFetch from '../../hooks/useFetch';
+import { API_BASE } from '../../services/constants';
 
 export default function Home() {
-  const [gifs, setGifs] = useState([]);
-  const [loading, setLoading] = useState( true );
-
-  useEffect(() => {
-    setLoading(true);
-    const getData = async () => {
-      const data = await getTrendingGifs();
-      setGifs(data);
-      setLoading(false);
-    }
-    getData();
-  }, [])
+  const { gifs, loading } = useFetch(`${API_BASE}/trending?api_key=${process.env.REACT_APP_API_GIPHY}&limit=12&offset=0&rating=G&lang=en`);
 
   if (loading) return <Spinner />;
 
