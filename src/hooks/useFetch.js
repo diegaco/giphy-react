@@ -1,9 +1,23 @@
 import { useState, useEffect } from 'react';
 
 const decorateGifs = gifs => {
-  return gifs.map(gif => {
-    const { url, width, height } = gif.images.downsized_medium;
-    const { title, id } = gif;
+  if (Array.isArray(gifs)) {
+    return gifs.map(gif => {
+      const { url, width, height } = gif.images.downsized_medium;
+      const { title, id } = gif;
+      return {
+        id,
+        title,
+        image: {
+          url,
+          width,
+          height
+        }
+      }
+    })
+  } else {
+    const { url, width, height } = gifs.images.downsized_medium;
+    const { title, id } = gifs;
     return {
       id,
       title,
@@ -13,7 +27,7 @@ const decorateGifs = gifs => {
         height
       }
     }
-  })
+  }
 }
 
 export default function useFetch(url) {
@@ -25,13 +39,12 @@ export default function useFetch(url) {
       setLoading(true);
       const res = await fetch(url);
       const data = await res.json();
-      let gifs = data.data || [];
-      if (gifs.length) {
+      let { data: gifs } = data;
+      if (gifs) {
         gifs = decorateGifs(gifs)
         setGifs(gifs);
         setLoading(false);
       }
-      return gifs;
     }
     getData();
 
