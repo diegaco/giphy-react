@@ -1,7 +1,7 @@
 import Search from './components/Search';
 import { Route, Link } from 'wouter';
 import Gifs from './pages/Gifs';
-import Detail from './pages/Detail/index';
+import Gif from './pages/Gif/index';
 import Home from './pages/Home';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
           </div>
           <Route path="/" component={Home} />
           <Route path="/gifs/:keyword" component={Gifs} />
-          <Route path="/gif/:id" component={Detail} />
+          <Route path="/gif/:id" component={Gif} />
         </section>
       </div>
     </main>
