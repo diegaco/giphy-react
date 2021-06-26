@@ -30,7 +30,7 @@ const decorateGifs = gifs => {
   }
 }
 
-export default function useFetch(url) {
+export default function useGifs(url) {
   const [gifs, setGifs] = useState([]);
   const [loading, setLoading] = useState(true);
 
