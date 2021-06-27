@@ -1,14 +1,31 @@
 import GifsList from '../../components/GifsList';
+import Pagination from '../../components/Pagination/Pagination';
 import Spinner from '../../components/Spinner';
 import useGifs from '../../hooks/useGifs';
-import { API_BASE } from '../../services/constants';
 
-export default function Gifs({ params: { keyword }}) {
-  const { gifs, loading } = useGifs(`${API_BASE}/gifs/search?api_key=${process.env.REACT_APP_API_GIPHY}&q=${keyword}&limit=12&offset=0&rating=G&lang=en`)
+export default function Gifs({ params: { keyword } }) {
+
+  const { gifs, loading, page, setPage } = useGifs({ type: 'search', query: keyword });
+
+  const handleNext = () => {
+    console.log('click next');
+    setPage(prev => prev + 1);
+  }
+
+  const handlePrev = () => {
+    console.log('click prev');
+    setPage(prev => prev - 1);
+  }
 
   if (loading) return <Spinner />;
 
   return (
-    <GifsList gifs={gifs} title={`🔎 ${keyword}`}/>
+    <>
+      <div className="mb-7">
+        <GifsList gifs={gifs} title={`🔎 ${keyword}`}/>
+      </div>
+      <Pagination page={page} handlePrev={handlePrev} handleNext={handleNext} />
+    </>
+
   )
 }

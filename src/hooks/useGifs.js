@@ -1,36 +1,15 @@
 import { useState, useEffect } from 'react';
+import { API_BASE } from '../services/constants';
+import decorateGifs from '../services/decorateGifs';
 
-const decorateGifs = gifs => {
-  if (Array.isArray(gifs)) {
-    return gifs.map(gif => {
-      const { url, width, height } = gif.images.downsized_medium;
-      const { title, id } = gif;
-      return {
-        id,
-        title,
-        image: {
-          url,
-          width,
-          height
-        }
-      }
-    })
-  } else {
-    const { url, width, height } = gifs.images.downsized_medium;
-    const { title, id } = gifs;
-    return {
-      id,
-      title,
-      image: {
-        url,
-        width,
-        height
-      }
-    }
-  }
-}
+const INITIAL_PAGE = 0;
 
-export default function useGifs(url) {
+export default function useGifs({ type, query, limit = 12 }) {
+  const [page, setPage] = useState(INITIAL_PAGE);
+  console.log('hook gif');
+  const url =
+    `${API_BASE}/gifs/${type}?api_key=${process.env.REACT_APP_API_GIPHY}${query ? '&q=' + query : ''}${limit ? '&limit=' + limit : ''}&offset=${page * limit}&rating=G&lang=en`
+
   const [gifs, setGifs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -48,7 +27,7 @@ export default function useGifs(url) {
     }
     getData();
 
-  }, [url]);
+  }, [url, page]);
 
-  return { gifs, loading };
+  return { gifs, loading, page, setPage };
 }

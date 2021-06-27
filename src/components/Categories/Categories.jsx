@@ -1,10 +1,9 @@
-import { API_BASE } from "../../services/constants";
 import Category from "../Category";
 import Spinner from "../Spinner";
 import useTrendings from "../../hooks/useTrendings";
 
 export default function Categories() {
-  const { trendings, loading } = useTrendings(`${API_BASE}/trending/searches?api_key=${process.env.REACT_APP_API_GIPHY}`);
+  const { trendings, loading } = useTrendings();
 
   if (loading) return <Spinner />;
 
