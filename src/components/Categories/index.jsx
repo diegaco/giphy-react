@@ -6,7 +6,6 @@ import useTrendings from "../../hooks/useTrendings";
 
 export default function Sidebar() {
   const { trendings, loading } = useTrendings(`${API_BASE}/trending/searches?api_key=${process.env.REACT_APP_API_GIPHY}`);
-  console.log(trendings);
 
   if (loading) return <Spinner />;
 
