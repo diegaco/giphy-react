@@ -1,21 +1,28 @@
+import { useEffect, useRef, useCallback } from 'react';
 import GifsList from '../../components/GifsList';
-import Pagination from '../../components/Pagination/Pagination';
 import Spinner from '../../components/Spinner';
 import useGifs from '../../hooks/useGifs';
+import useNearScreen from '../../hooks/useNearScreen';
+import debounce from 'just-debounce-it';
 
 export default function Gifs({ params: { keyword } }) {
-
-  const { gifs, loading, page, setPage } = useGifs({ type: 'search', query: keyword });
+  const elRef = useRef();
+  const { gifs, loading, setPage } = useGifs({ type: 'search', query: keyword, limit: 16 });
+  const { isNearScreen } = useNearScreen({
+    externalRef: loading ? null : elRef,
+    once: false
+  });
 
   const handleNext = () => {
-    console.log('click next');
     setPage(prev => prev + 1);
   }
+  // eslint-disable-next-line
+  const handleDebouncedNextPage = useCallback(debounce(handleNext, 500),
+  []);
 
-  const handlePrev = () => {
-    console.log('click prev');
-    setPage(prev => prev - 1);
-  }
+  useEffect(() => {
+    if (isNearScreen) handleDebouncedNextPage()
+  }, [isNearScreen, handleDebouncedNextPage]);
 
   if (loading) return <Spinner />;
 
@@ -23,8 +30,8 @@ export default function Gifs({ params: { keyword } }) {
     <>
       <div className="mb-7">
         <GifsList gifs={gifs} title={`🔎 ${keyword}`}/>
+        <div id="infinite-scroll-visor" ref={elRef}></div>
       </div>
-      <Pagination page={page} handlePrev={handlePrev} handleNext={handleNext} />
     </>
 
   )

@@ -5,7 +5,7 @@ import WithSidebar from '../../components/WithSidebar';
 
 
 export default function Home() {
-  const { gifs, loading } = useGifs({ type: 'trending' });
+  const { gifs, loading } = useGifs({ type: 'trending', limit: 12 });
   const GifListWithSidebar = WithSidebar(GifsList);
 
   return (
