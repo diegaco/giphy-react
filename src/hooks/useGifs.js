@@ -11,25 +11,30 @@ export default function useGifs({ type, query, limit = 16 }) {
 
   const [gifs, setGifs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       if (page === INITIAL_PAGE) setLoading(true);
       const res = await fetch(url);
-      const data = await res.json();
-      let { data: gifs } = data;
-      if (gifs) {
-        gifs = decorateGifs(gifs)
-        if (page === INITIAL_PAGE) {
-          setGifs(gifs);
-          setLoading(false);
-        } else {
-          setGifs(prev => prev.concat(gifs));
+      let { data: gifs, meta} = await res.json();
+
+      if (meta.status === 404) {
+        setError(true);
+      } else {
+        if (gifs) {
+          gifs = decorateGifs(gifs)
+          if (page === INITIAL_PAGE) {
+            setGifs(gifs);
+            setLoading(false);
+          } else {
+            setGifs(prev => prev.concat(gifs));
+          }
         }
       }
     }
     getData();
   }, [url, page]);
 
-  return { gifs, loading, page, setPage };
+  return { gifs, loading, error, page, setPage };
 }

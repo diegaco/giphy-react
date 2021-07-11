@@ -4,6 +4,7 @@ import Spinner from '../../components/Spinner';
 import useGifs from '../../hooks/useGifs';
 import useNearScreen from '../../hooks/useNearScreen';
 import debounce from 'just-debounce-it';
+import useSeo from '../../hooks/useSeo';
 
 export default function Gifs({ params: { keyword } }) {
   const elRef = useRef();
@@ -12,6 +13,8 @@ export default function Gifs({ params: { keyword } }) {
     externalRef: loading ? null : elRef,
     once: false
   });
+  const title = gifs ? `${gifs.length} results of ${keyword}` : '';
+  useSeo({ title, description: `Gifs related by the term ${keyword}` });
 
   const handleNext = () => {
     setPage(prev => prev + 1);
