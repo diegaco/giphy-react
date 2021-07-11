@@ -25,7 +25,7 @@ export default function Detail({params: { id }}) {
           <>
             <Helmet>
               <title>
-                {title} | Giffy
+                {pageTitle} | Giffy
               </title>
             </Helmet>
             <Gif
