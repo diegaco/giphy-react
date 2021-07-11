@@ -1,9 +1,6 @@
 module.exports = {
-  purge: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: false, // or 'media' or 'class'
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {},
     container: {
@@ -21,3 +18,4 @@ module.exports = {
   },
   plugins: [],
 }
+
