@@ -4,7 +4,7 @@ import Spinner from '../../components/Spinner';
 import useGifs from '../../hooks/useGifs';
 import useNearScreen from '../../hooks/useNearScreen';
 import debounce from 'just-debounce-it';
-import useSeo from '../../hooks/useSeo';
+import { Helmet } from 'react-helmet';
 
 export default function Gifs({ params: { keyword } }) {
   const elRef = useRef();
@@ -14,7 +14,6 @@ export default function Gifs({ params: { keyword } }) {
     once: false
   });
   const title = gifs ? `${gifs.length} results of ${keyword}` : '';
-  useSeo({ title, description: `Gifs related by the term ${keyword}` });
 
   const handleNext = () => {
     setPage(prev => prev + 1);
@@ -31,6 +30,13 @@ export default function Gifs({ params: { keyword } }) {
 
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+        <meta
+          name="description"
+          content={`Gifs related by the term ${keyword}`}
+        />
+      </Helmet>
       <div className="mb-7">
         <GifsList gifs={gifs} title={`🔎 ${keyword}`}/>
         <div id="infinite-scroll-visor" ref={elRef}></div>
