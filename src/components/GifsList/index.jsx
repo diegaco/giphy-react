@@ -3,7 +3,7 @@ import Gif from '../Gif';
 export default function GifsList({ gifs, title='📝 Gifs List', cols = 4 }) {
   return (
     <>
-      <h2 className="text-4xl md:text-5xl font-medium text-purple-300 mb-7 text-center">{decodeURI(title)}</h2>
+      <h2 className="text-4xl md:text-5xl font-medium text-purple-300 mb-7 text-center">{title}</h2>
       {
         gifs.length ?
           (
