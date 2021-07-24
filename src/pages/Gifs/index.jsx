@@ -13,7 +13,8 @@ export default function Gifs({ params: { keyword } }) {
     externalRef: loading ? null : elRef,
     once: false
   });
-  const title = gifs ? `${gifs.length} results of ${keyword}` : '';
+  let decodedKeyword = decodeURI(keyword);
+  const title = gifs ? `${gifs.length} results of ${decodedKeyword}` : '';
 
   const handleNext = () => {
     setPage(prev => prev + 1);
@@ -34,11 +35,11 @@ export default function Gifs({ params: { keyword } }) {
         <title>{title}</title>
         <meta
           name="description"
-          content={`Gifs related by the term ${keyword}`}
+          content={`Gifs related by the term ${decodedKeyword}`}
         />
       </Helmet>
       <div className="mb-7">
-        <GifsList gifs={gifs} title={`🔎 ${keyword}`}/>
+        <GifsList gifs={gifs} title={`🔎 ${decodedKeyword}`}/>
         <div id="infinite-scroll-visor" ref={elRef}></div>
       </div>
     </>
