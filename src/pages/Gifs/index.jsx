@@ -7,8 +7,9 @@ import debounce from 'just-debounce-it';
 import { Helmet } from 'react-helmet';
 
 export default function Gifs({ params: { keyword } }) {
+  const prevQuery = useRef('');
   const elRef = useRef();
-  const { gifs, loading, setPage } = useGifs({ type: 'search', query: keyword, limit: 16 });
+  const { gifs, loading, setPage } = useGifs({ type: 'search', query: keyword, limit: 16});
   const { isNearScreen } = useNearScreen({
     externalRef: loading ? null : elRef,
     once: false
@@ -25,7 +26,15 @@ export default function Gifs({ params: { keyword } }) {
 
   useEffect(() => {
     if (isNearScreen) handleDebouncedNextPage()
-  }, [isNearScreen, handleDebouncedNextPage]);
+
+    // reset page when keyword term change
+    if (prevQuery.current !== '' && prevQuery.current !== keyword) {
+      setPage(0);
+    }
+
+    prevQuery.current = keyword;
+
+  }, [isNearScreen, handleDebouncedNextPage, keyword, setPage]);
 
   if (loading) return <Spinner />;
 
