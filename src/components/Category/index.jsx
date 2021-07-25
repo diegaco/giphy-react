@@ -4,7 +4,7 @@ export default function Category({ trending }) {
   const [, setLocation] = useLocation();
   const handleClick = ev => {
     ev.preventDefault();
-    setLocation(`gifs/${encodeURIComponent(trending)}`);
+    setLocation(`gifs/${encodeURI(trending)}`);
   }
   return (
     <a className="text-white py-2" href="/" onClick={handleClick}>

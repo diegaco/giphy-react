@@ -6,10 +6,10 @@ import useNearScreen from '../../hooks/useNearScreen';
 import debounce from 'just-debounce-it';
 import { Helmet } from 'react-helmet';
 
-export default function Gifs({ params: { keyword } }) {
+export default function Gifs({ params: { keyword, rating } }) {
   const prevQuery = useRef('');
   const elRef = useRef();
-  const { gifs, loading, setPage } = useGifs({ type: 'search', query: keyword, limit: 16});
+  const { gifs, loading, setPage } = useGifs({ type: 'search', query: keyword, limit: 16, rating});
   const { isNearScreen } = useNearScreen({
     externalRef: loading ? null : elRef,
     once: false

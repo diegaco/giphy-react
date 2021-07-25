@@ -20,7 +20,7 @@ function App() {
           </div>
           <div className="p-6 bg-gray-600 rounded">
             <Route path="/" component={Home} />
-            <Route path="/gifs/:keyword" component={Gifs} />
+            <Route path="/gifs/:keyword/:rating?" component={Gifs} />
             <Route path="/gif/:id" component={Gif} />
             <Route path="/404" component={() => (
               <div className="py-52">
