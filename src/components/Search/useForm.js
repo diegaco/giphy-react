@@ -1,13 +1,13 @@
 import { useReducer } from "react";
 
 const ACTIONS = {
-  SET_KEYWORD: 'SET_KEYWORD',
+  SET_SEARCH: 'SET_SEARCH',
   SET_RATING: 'SET_RATING',
   INCREASE_COUNT: 'INCREASE_COUNT',
 }
 
 const reducer = (state, { type, payload }) => {
-  if (type === ACTIONS.SET_KEYWORD) {
+  if (type === ACTIONS.SET_SEARCH) {
     return {
       ...state,
       search: payload
@@ -27,7 +27,7 @@ const reducer = (state, { type, payload }) => {
   }
 };
 
-export default function useForm({ initialSearch, initialRating }) {
+export default function useForm({ initialSearch = '', initialRating = '' } = {}) {
   const [state, dispatch] = useReducer(reducer, {
     search: initialSearch,
     rating: initialRating,
@@ -41,7 +41,7 @@ export default function useForm({ initialSearch, initialRating }) {
     rating,
     times,
     updateSearch: search =>
-      dispatch({ type: ACTIONS.SET_KEYWORD, payload: search }),
+      dispatch({ type: ACTIONS.SET_SEARCH, payload: search }),
     updateRating: rating =>
       dispatch({ type: ACTIONS.SET_RATING, payload: rating }),
     increaseCount: () =>

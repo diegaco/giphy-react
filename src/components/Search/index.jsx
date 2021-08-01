@@ -40,6 +40,7 @@ export default function Search() {
   useEffect(() => {
     updateSearch(initialSearch);
     updateRating(initialRating);
+  // eslint-disable-next-line
   }, [initialSearch, initialRating])
 
   return (
