@@ -1,21 +1,35 @@
-import { useCallback, useEffect, useContext, useRef } from "react";
+import { useState, useCallback, useEffect, useContext, useRef } from "react";
 import { Context } from "../context/UserContext";
 import { auth, signInWithGoogle, createUserProfileDoc } from '../services/firebase.utils';
 
 export default function useUser() {
   const { user, setUser } = useContext(Context);
+  const [loading, setLoading] = useState(false);
   let unsubscribeFromAuth = useRef();
 
   useEffect(() => {
-    unsubscribeFromAuth.current = auth.onAuthStateChanged(user => {
-      createUserProfileDoc(user);
-      setUser(user);
+    unsubscribeFromAuth.current = auth.onAuthStateChanged(async user => {
+      if (user) {
+        const userRef = await createUserProfileDoc(user);
+        userRef.onSnapshot(snap => {
+          const user = {
+            id: snap.id,
+            ...snap.data()
+          }
+          console.log(user);
+          setUser(user);
+          setLoading(false);
+        })
+      } else {
+        setUser(null);
+      }
     });
 
     return () => unsubscribeFromAuth.current();
   }, [setUser])
 
   const login = useCallback(() => {
+    setLoading(true);
     signInWithGoogle();
   }, []);
 
@@ -27,6 +41,7 @@ export default function useUser() {
     isLoggedIn: Boolean(user),
     user,
     login,
-    logout
+    logout,
+    loading
   }
 }
