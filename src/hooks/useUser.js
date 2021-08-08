@@ -1,7 +1,6 @@
-import { useCallback } from "react";
-import { useEffect, useContext, useRef } from "react";
+import { useCallback, useEffect, useContext, useRef } from "react";
 import { Context } from "../context/UserContext";
-import { auth, signInWithGoogle } from '../services/firebase.utils';
+import { auth, signInWithGoogle, createUserProfileDoc } from '../services/firebase.utils';
 
 export default function useUser() {
   const { user, setUser } = useContext(Context);
@@ -9,6 +8,7 @@ export default function useUser() {
 
   useEffect(() => {
     unsubscribeFromAuth.current = auth.onAuthStateChanged(user => {
+      createUserProfileDoc(user);
       setUser(user);
     });
 

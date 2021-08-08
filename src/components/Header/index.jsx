@@ -11,7 +11,9 @@ export default function Header() {
         {
           isLoggedIn ?
             <>
-              <div className="text-white">{user.displayName}</div>
+              <div className="flex items-center">
+                <img className="rounded-full h-10 w-10 mr-2" src={user.photoURL} alt={user.displayName} /><div className="text-white">{user.displayName}</div>
+              </div>
               <button onClick={() => logout()} className="text-white">
                 Log out
               </button>
