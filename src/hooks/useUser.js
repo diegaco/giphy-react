@@ -12,11 +12,12 @@ export default function useUser() {
       if (user) {
         const userRef = await createUserProfileDoc(user);
         userRef.onSnapshot(snap => {
+          console.log(snap);
+          // TODO aca leo favoritos
           const user = {
             id: snap.id,
             ...snap.data()
           }
-          console.log(user);
           setUser(user);
           setLoading(false);
         })
