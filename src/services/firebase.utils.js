@@ -43,6 +43,7 @@ export const createUserProfileDoc = async (user, data) => {
 export const addFavorite = async ({ userId, favId }) => {
   if (!userId) return;
 
+  let favs;
   const favRef = firestore.doc(`users/${userId}/favorites/${favId}`);
   const favSnap = await favRef.get();
 
@@ -51,33 +52,38 @@ export const addFavorite = async ({ userId, favId }) => {
       await favRef.set({
         favId
       });
+      favs = await getFavorites({ userId });
     } catch (error) {
       console.log('error creating fav', error.message);
     }
   }
 
-  return favRef;
+  return favs;
 };
 
-export const removeFavorite = async ({ userId, favId }) => {
+export const deleteFavorite = async ({ userId, favId }) => {
   if (!userId) return;
-
+  let favs;
   const favRef = firestore.doc(`users/${userId}/favorites/${favId}`);
   const favSnap = await favRef.get();
 
-  if (!favSnap.exists) {
+  if (favSnap.exists) {
     try {
+      console.log('remove');
       await favRef.delete();
+      favs = await getFavorites({ userId });
     } catch (error) {
       console.log('error deleting fav', error.message);
     }
   }
 
-  return favRef;
+  return favs;
 };
 
 export const getFavorites = async ({ userId }) => {
   if (!userId) return;
+
+  let favs = [];
 
   const favRef = firestore.collection(`users/${userId}/favorites`);
   const favSnap = await favRef.get();
@@ -85,14 +91,14 @@ export const getFavorites = async ({ userId }) => {
   if (!favSnap.exists) {
     try {
       favSnap.forEach(doc => {
-        console.log(doc.data());
+        favs.push(doc.data());
       })
     } catch (error) {
       console.log('error creating fav', error.message);
     }
   }
 
-  return favRef;
+  return favs;
 };
 
 // Initialize Firebase

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { memo } from 'react';
 import { Link } from 'wouter';
 import Fav from '../Fav';
