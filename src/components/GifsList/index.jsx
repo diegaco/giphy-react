@@ -1,8 +1,6 @@
 import Gif from '../Gif';
-import useUser from '../../hooks/useUser';
 
 export default function GifsList({ gifs, title='📝 Gifs List', cols = 4 }) {
-  const { user = {} } = useUser();
   return (
     <>
       <h2 className="text-4xl md:text-5xl font-medium text-purple-300 mb-7 text-center">{title}</h2>
@@ -18,7 +16,6 @@ export default function GifsList({ gifs, title='📝 Gifs List', cols = 4 }) {
                   url={url}
                   width={width}
                   height={height}
-                  userId={user?.id}
                 />
               ))}
             </div>

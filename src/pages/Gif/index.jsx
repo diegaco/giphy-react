@@ -3,10 +3,8 @@ import useGifs from '../../hooks/useGifs';
 import Gif from '../../components/Gif';
 import { Redirect } from 'wouter';
 import { Helmet } from 'react-helmet';
-import useUser from '../../hooks/useUser';
 
 export default function Detail({params: { id }}) {
-  const { user = {} } = useUser();
   const { gifs: { title, image: { url, width, height } = {} }, loading, error } = useGifs({ type: id })
   const pageTitle = title ? title : '';
 
@@ -36,7 +34,6 @@ export default function Detail({params: { id }}) {
               url={url}
               width={width}
               height={height}
-              userId={user?.id}
             />
           </>
       }
