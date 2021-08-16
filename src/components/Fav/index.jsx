@@ -18,7 +18,7 @@ export default function Fav({ favId }) {
   const [label, emoji] = isFav ? ['Delete Fav', '❌'] : ['Add Fav', '❤️'];
 
   return (
-    favs.length && id ?
+    id ?
       <button title={label} onClick={handleClick} className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white bg-opacity-50">
         {emoji}
       </button> :

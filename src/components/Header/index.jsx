@@ -1,6 +1,7 @@
 import { Link } from 'wouter';
 import useUser from '../../hooks/useUser';
 import { ReactComponent as UserLogo } from '../../assets/user.svg';
+import avatar from '../../assets/avatar.svg';
 
 export default function Header() {
   const { user, isLoggedIn, logout } = useUser();
@@ -12,7 +13,7 @@ export default function Header() {
           isLoggedIn ?
             <>
               <div className="flex items-center">
-                <img className="rounded-full h-10 w-10 mr-2" src={user.photoURL} alt={user.displayName} /><div className="text-white">{user.displayName}</div>
+                <img className="rounded-full h-10 w-10 mr-2" src={user.photoURL ? user.photoURL : avatar} alt={user.displayName} /><div className="text-white">{user.displayName}</div>
               </div>
               <button onClick={() => logout()} className="text-white">
                 Log out

@@ -6,7 +6,7 @@ import Gif from './pages/Gif/index';
 import Home from './pages/Home';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
-import Login from './pages/Login';
+import LoginPage from './pages/Login';
 import {Context } from './context/UserContext';
 import { auth, createUserProfileDoc, getFavorites } from './services/firebase.utils';
 
@@ -64,7 +64,7 @@ function App() {
                 <Route path="/" component={Home} />
                 <Route path="/gifs/:keyword/:rating?" component={Gifs} />
                 <Route path="/gif/:id" component={Gif} />
-                <Route path="/login" component={Login} />
+                <Route path="/login" component={LoginPage} />
                 <Route path="/404" component={NotFound} />
                 <Redirect path="/:rest*" to="/404" />
               </Switch>

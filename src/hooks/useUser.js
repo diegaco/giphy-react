@@ -3,7 +3,7 @@ import { Context } from '../context/UserContext';
 import { auth, signInWithGoogle, addFavorite, deleteFavorite } from '../services/firebase.utils';
 
 export default function useUser() {
-  const { user, favs, setFavs } = useContext(Context);
+  const { user, favs } = useContext(Context);
   const [loading, setLoading] = useState(false);
 
   const login = useCallback(() => {
