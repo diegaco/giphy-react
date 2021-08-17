@@ -6,7 +6,16 @@ export default function useUser() {
   const { user, favs } = useContext(Context);
   const [loading, setLoading] = useState(false);
 
-  const login = useCallback(() => {
+  const login = useCallback( async ({ email, password}) => {
+    setLoading(true);
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, []);
+
+  const loginWithGoogle = useCallback(() => {
     setLoading(true);
     signInWithGoogle();
   }, []);
@@ -27,6 +36,7 @@ export default function useUser() {
     isLoggedIn: Boolean(user),
     user,
     login,
+    loginWithGoogle,
     logout,
     loading,
     favs,

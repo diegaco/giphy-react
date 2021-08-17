@@ -8,7 +8,7 @@ export default function FormInput({handleChange, label, ...rest }) {
           </label> :
           null
       }
-      <input className="form-control" onChange={handleChange} {...rest}/>
+      <input className="form-control block w-full" onChange={handleChange} {...rest}/>
     </div>
   )
 }
