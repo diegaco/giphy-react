@@ -14,6 +14,7 @@ const config = {
 };
 
 export const createUserProfileDoc = async (user, data) => {
+  console.log('create profile');
   if (!user) return;
 
   const userRef = firestore.doc(`users/${user.uid}`);
@@ -41,6 +42,7 @@ export const createUserProfileDoc = async (user, data) => {
 };
 
 export const addFavorite = async ({ userId, favId }) => {
+  console.log('add fav');
   if (!userId) return;
 
   const favRef = firestore.doc(`users/${userId}/favorites/${favId}`);
@@ -61,6 +63,7 @@ export const addFavorite = async ({ userId, favId }) => {
 };
 
 export const deleteFavorite = async ({ userId, favId }) => {
+  console.log('delete fav');
   if (!userId) return;
   const favRef = firestore.doc(`users/${userId}/favorites/${favId}`);
   const favSnap = await favRef.get();
@@ -78,6 +81,7 @@ export const deleteFavorite = async ({ userId, favId }) => {
 };
 
 export const getFavorites = async ({ userId }) => {
+  console.log('get favs');
   if (!userId) return;
 
   const favRef = firestore.collection(`users/${userId}/favorites`);
