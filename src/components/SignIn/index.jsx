@@ -3,6 +3,7 @@ import { useLocation } from 'wouter';
 import FormInput from '../FormInput';
 import Spinner from '../Spinner';
 import useUser from '../../hooks/useUser';
+import Message from '../Message/Message';
 
 export default function SignIn() {
   const [state, setState] = useState({
@@ -10,7 +11,7 @@ export default function SignIn() {
     password: ''
   });
   const [, setLocation] = useLocation();
-  const { user, login, loginWithGoogle, isLoggedIn, loading } = useUser();
+  const { user, login, loginWithGoogle, isLoggedIn, loading, error, message } = useUser();
 
   useEffect(() => {
     if (isLoggedIn) setTimeout(() => setLocation('/'), 1000)
@@ -34,6 +35,13 @@ export default function SignIn() {
       <h2 className="text-4xl md:text-5xl font-medium text-purple-300 mb-7 text-center">
         Login { isLoggedIn ? user.displayName : null }
       </h2>
+      {
+        message ?
+        <div className="mb-5">
+          <Message error={error} message={message} />
+        </div> :
+          null
+      }
       <form className="" action="" onSubmit={handleSubmit}>
         <FormInput
           type="email"
