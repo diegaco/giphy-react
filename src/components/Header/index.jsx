@@ -1,10 +1,13 @@
-import { Link } from 'wouter';
 import useUser from '../../hooks/useUser';
 import { ReactComponent as UserLogo } from '../../assets/user.svg';
 import avatar from '../../assets/avatar.svg';
+import Modal from '../Modal';
+import Login from '../Login';
+import useModal from '../../hooks/useModal';
 
 export default function Header() {
   const { user, isLoggedIn, logout } = useUser();
+  const { showModal, setShowModal, onClose } = useModal();
 
   return (
     <header className="py-3 px-4 bg-gray-900">
@@ -19,10 +22,19 @@ export default function Header() {
                 Log out
               </button>
             </> :
-            <Link to="/login" className="text-white inline-flex items-center bg-purple-700 border-0 py-1 px-3 focus:outline-none hover:bg-purple-800 rounded text-base">
+            <>
+            <button onClick={ev => setShowModal(true)} className="text-white inline-flex items-center bg-purple-700 border-0 py-1 px-3 focus:outline-none hover:bg-purple-800 rounded text-base">
               <UserLogo className="mr-2 text-white" />
               Login
-            </Link>
+            </button>
+            {
+              showModal ?
+              <Modal onClose={onClose}>
+                <Login />
+              </Modal> :
+                null
+            }
+            </>
         }
       </div>
     </header>

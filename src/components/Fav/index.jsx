@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import useUser from '../../hooks/useUser';
 import Modal from '../Modal';
+import useModal from '../../hooks/useModal';
+import Login from '../Login';
 
 export default function Fav({ favId }) {
   const { user, addFav, deleteFav, favs } = useUser();
+  const { showModal, setShowModal, onClose } = useModal();
   const { id } = user || {};
-  const [ showModal, setShowModal ] = useState(false);
   const isFav = favs.find(fav => fav.favId === favId);
   console.log(id);
 
@@ -23,15 +24,15 @@ export default function Fav({ favId }) {
     }
   }
 
-  const onClose = () => setShowModal(false);
-
   const [label, emoji] = isFav ? ['Delete Fav', '❌'] : ['Add Fav', '❤️'];
 
   return (
     <>
       {
         showModal ?
-          <Modal onClose={onClose} /> :
+          <Modal onClose={onClose}>
+            <Login/>
+          </Modal> :
         null
       }
       <button title={label} onClick={handleClick} className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white bg-opacity-50">

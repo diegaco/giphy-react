@@ -25,7 +25,7 @@ export default function SignUp() {
 
   return (
     <>
-      <h2 className="text-4xl md:text-5xl font-medium text-purple-300 mb-7 text-center">
+      <h2 className="text-2xl font-bold tracking-wide mb-7">
         Create an account for free.
       </h2>
       {
@@ -89,7 +89,7 @@ export default function SignUp() {
               <Spinner />
             </div> :
             <div className="flex justify-center flex-grow">
-              <button type="submit" className="px-5 py-3 font-medium rounded bg-purple-500 text-white focus:outline-none focus:ring-4 focus:ring-purple-300 focus:border-transparent transition-all">Create an account</button>
+              <button type="submit" className="px-5 py-3 font-semibold bg-purple-500 text-white focus:outline-none focus:ring-4 focus:ring-purple-300 focus:border-transparent transition-all">Create an account</button>
             </div>
         }
       </form>

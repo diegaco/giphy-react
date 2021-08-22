@@ -38,6 +38,7 @@ function App() {
         })
       } else {
         setUser(null);
+        setFavs([]);
       }
     });
 
