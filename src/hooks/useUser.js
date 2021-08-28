@@ -24,26 +24,14 @@ export default function useUser() {
 
   const register = useCallback(async ({ displayName, email, password, confirmPassword  }) => {
     setLoading(true);
-    console.log('');
-
-    if (password !== confirmPassword) {
-      console.log('Password dont match');
-      setError(true);
-      setMessage('Password don`t match');
-      setLoading(false);
-      return;
-    }
+    console.log(password, confirmPassword);
 
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
       await createUserProfileDoc(user, { displayName });
-      setError(false);
-      setMessage('Your account was successfully created');
       setLoading(false);
     } catch (err) {
-      setError(true);
-      setMessage(`There was a problem registering your account. ${err.message}`);
-      setLoading(false);
+      throw err;
     }
   }, []);
 
