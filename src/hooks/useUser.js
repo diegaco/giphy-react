@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { Context } from '../context/UserContext';
 import { auth, createUserProfileDoc , signInWithGoogle, addFavorite, deleteFavorite } from '../services/firebase.utils';
 
