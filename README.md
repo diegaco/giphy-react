@@ -1,3 +1,22 @@
+# [Buscador de Gifs ⚛️](https://giffy-one-sandy.vercel.app/)
+
+- Aplicación creada con *Create React App*
+- Custom Hooks
+- Lazy Load, Suspense y Paginación
+- Infinite Scroll
+- SEO con React Helmet
+- Gestion de usuarios con Firebase y Favoritos
+- React Context para estados globales
+- Formularios con Formik
+- Modales con React portals
+- API: [Giphy](https://developers.giphy.com/)
+- Estilos con Tailwind CSS
+- Deploys en Vercel
+
+**[Curso de React ⚛️ desde cero 2020](https://www.youtube.com/watch?v=T_j60n1zgu0&list=PLV8x_i1fqBw0B008sQn79YxCjkHJU84pC)**
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
