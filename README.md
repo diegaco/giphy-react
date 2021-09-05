@@ -5,13 +5,13 @@
 - Lazy Load, Suspense y Paginación
 - Infinite Scroll
 - SEO con React Helmet
-- Gestion de usuarios con Firebase y Favoritos
+- Gestion de usuarios y favoritos con Firebase y Firestore.
 - React Context para estados globales
 - Formularios con Formik
 - Modales con React portals
-- API: [Giphy](https://developers.giphy.com/)
+- API de Gifs: [Giphy](https://developers.giphy.com/)
 - Estilos con Tailwind CSS
-- Deploys en Vercel
+- Deploy en Vercel
 
 **[Curso de React ⚛️ desde cero 2020](https://www.youtube.com/watch?v=T_j60n1zgu0&list=PLV8x_i1fqBw0B008sQn79YxCjkHJU84pC)**
 
