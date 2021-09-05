@@ -8,7 +8,6 @@ export default function Fav({ favId }) {
   const { showModal, setShowModal, onClose } = useModal();
   const { id } = user || {};
   const isFav = favs.find(fav => fav.favId === favId);
-  console.log(id);
 
   const handleClick = ev => {
     ev.stopPropagation(); // prevent redirect

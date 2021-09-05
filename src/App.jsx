@@ -1,6 +1,6 @@
 import { useEffect, useRef, useContext } from 'react';
 import Search from './components/Search';
-import { Route, Link, Switch, Redirect} from 'wouter';
+import { Route, Link, Switch, Redirect } from 'wouter';
 import Gifs from './pages/Gifs';
 import Gif from './pages/Gif/index';
 import Home from './pages/Home';
@@ -34,7 +34,7 @@ function App() {
             id: snap.id,
             ...snap.data()
           }
-          setUser(user);
+          setTimeout(() => setUser(user), 500);
         })
       } else {
         setUser(null);
